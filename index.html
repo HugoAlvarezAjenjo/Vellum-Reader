@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vellum Reader</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/reader.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>Vellum Reader</h1>
+        <div class="header-controls">
+            <button class="dark-mode-toggle" id="dark-mode-toggle" title="Toggle Dark Mode">
+                🌙
+            </button>
+            <label for="epub-file-input" class="file-upload-btn">
+                📂 Load EPUB File
+                <input type="file" id="epub-file-input" accept=".epub" style="display: none;">
+            </label>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <!-- Book Selection Section -->
+        <section class="book-selection" id="book-selection">
+            <h2>Available Books</h2>
+            <div class="books-grid" id="books-grid">
+                <!-- Books will be loaded dynamically -->
+                <div class="loading-books">
+                    <p>Loading available books...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reading Interface -->
+        <section class="reading-interface" id="reading-interface" style="display: none;">
+            <!-- Left Side Panel (Previous Button Only) -->
+            <div class="side-panel left-panel" id="left-panel">
+                <button class="side-control prev-btn" id="prev-page" disabled title="Previous Page">
+                    ←
+                </button>
+            </div>
+
+            <!-- Right Side Panel (Next Button Only) -->
+            <div class="side-panel right-panel" id="right-panel">
+                <button class="side-control next-btn" id="next-page" title="Next Page">
+                    →
+                </button>
+            </div>
+
+            <!-- Top Left Corner - Back to Library -->
+            <div class="corner-control top-left" id="top-left-control">
+                <button class="corner-btn back-to-library" id="back-to-library" title="Back to Library">
+                    📚
+                </button>
+            </div>
+
+            <!-- Top Right Corner - Font Size Controls -->
+            <div class="corner-control top-right" id="top-right-control">
+                <div class="font-size-controls">
+                    <button class="font-btn" id="font-decrease" title="Decrease Font Size">A-</button>
+                    <input type="number" class="font-size-input" id="font-size-input" 
+                           min="12" max="32" value="16" title="Font Size (px)">
+                    <button class="font-btn" id="font-increase" title="Increase Font Size">A+</button>
+                </div>
+            </div>
+
+            <!-- Bottom Left Corner - Table of Contents -->
+            <div class="corner-control bottom-left" id="bottom-left-control">
+                <button class="corner-btn toc-btn" id="return-to-toc" style="display: none;" title="Table of Contents">
+                    📋
+                </button>
+            </div>
+
+            <!-- Bottom Right Corner - Reading Progress -->
+            <div class="corner-control bottom-right" id="bottom-right-control">
+                <div class="reading-progress">
+                    <div class="progress-info">
+                        <span id="current-chapter">Chapter 1</span>
+                        <span id="page-info">Page 1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Minimalist Header (only book title, auto-hide) -->
+            <div class="minimal-header" id="minimal-header">
+                <div class="book-title" id="current-book-title">Book Title</div>
+            </div>
+
+            <!-- Main Reading Area -->
+            <div class="reading-container">
+                <div class="content-area" id="content-area">
+                    <div class="chapter-content" id="chapter-content">
+                        <!-- EPUB content will be rendered here -->
+                        <p>Loading book content...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading/Error States -->
+        <div class="status-overlay" id="status-overlay" style="display: none;">
+            <div class="status-content">
+                <div class="loading-spinner" id="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Loading EPUB file...</p>
+                </div>
+                <div class="error-message" id="error-message" style="display: none;">
+                    <h3>⚠️ Error</h3>
+                    <p id="error-text">Something went wrong</p>
+                    <button class="retry-btn" id="retry-btn">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript Modules -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
